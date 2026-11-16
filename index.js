@@ -39,6 +39,19 @@ app.post("/cadastrar", (request, response) => {
         response.status(201).json({ mensagem: "Música cadastrada com sucesso!" })
     })
 })
+app.delete("/apagar/:id", (request, response) => {
+    const { id } = request.params
+
+    const comandoDelete = "DELETE FROM musicas_DanieldeSouzaSilva WHERE id = ?"
+
+    sql.query(comandoDelete, [id], (error) => {
+        if (error) {
+            console.log(error)
+            return
+        }
+        response.json({ mensagem: "Música apagada com sucesso!" })
+    })
+})
 app.listen(3000, () => {
     console.log("Servidor online")
 })
